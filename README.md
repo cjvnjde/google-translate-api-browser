@@ -1,1 +1,0 @@
-# google-translate-api-browser
