@@ -10,7 +10,7 @@ npm run start
 ```
 
 For cross origin requests it uses [cors-anywhere
-](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server https://cors-anywhere.herokuapp.com/ or set up your own.
+](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server ```https://cors-anywhere.herokuapp.com/``` or set up your own.
 
 ## Example
 
