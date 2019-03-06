@@ -66,7 +66,7 @@ var wr = function(a) {
 
 function token(text) {
   return new Promise(resolve => {
-    var tk = sM(text);
+    let tk = sM(text);
     tk = tk.replace("&tk=", "");
     resolve({ name: "tk", value: tk });
   });
@@ -84,7 +84,7 @@ function translate(text, opts) {
   opts = opts || {};
 
   var e;
-  [opts.from, opts.to].forEach(function(lang) {
+  [opts.from, opts.to].forEach(lang => {
     if (lang && !isSupported(lang)) {
       e = new Error();
       e.code = 400;
@@ -92,7 +92,7 @@ function translate(text, opts) {
     }
   });
   if (e) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       reject(e);
     });
   }
@@ -104,9 +104,9 @@ function translate(text, opts) {
   opts.to = getCode(opts.to);
 
   return token(text)
-    .then(function(token) {
-      var url = "https://translate.google.com/translate_a/single";
-      var data = {
+    .then(token => {
+      const url = "https://translate.google.com/translate_a/single";
+      const data = {
         client: "gtx",
         sl: opts.from,
         tl: opts.to,
@@ -124,14 +124,14 @@ function translate(text, opts) {
 
       return url + "?" + querystring.stringify(data);
     })
-    .then(function(url) {
+    .then(url => {
       return axios
         .get(CORSAnywhere + url)
         .then(res_ => {
           const res = {
             body: JSON.stringify(res_.data)
           };
-          var result = {
+          const result = {
             text: "",
             from: {
               language: {
@@ -151,7 +151,7 @@ function translate(text, opts) {
             result.raw = res.body;
           }
 
-          var body = safeEval(res.body);
+          const body = safeEval(res.body);
           body[0].forEach(function(obj) {
             if (obj[0]) {
               result.text += obj[0];
@@ -166,7 +166,7 @@ function translate(text, opts) {
           }
 
           if (body[7] && body[7][0]) {
-            var str = body[7][0];
+            const str = body[7][0];
 
             str = str.replace(/<b><i>/g, "[");
             str = str.replace(/<\/i><\/b>/g, "]");
@@ -181,9 +181,8 @@ function translate(text, opts) {
           }
           return result;
         })
-        .catch(function(err) {
-          var e;
-          e = new Error();
+        .catch(err => {
+          const e = new Error();
           if (err.statusCode !== undefined && err.statusCode !== 200) {
             e.code = "BAD_REQUEST";
           } else {
