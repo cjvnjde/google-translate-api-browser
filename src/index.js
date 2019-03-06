@@ -1,4 +1,8 @@
-import translate from "./gTranslateApi";
+import translate, { setCORS } from "./gTranslateApi";
+
+// setting up cors-anywhere server address
+// default "http://cors-anywhere.herokuapp.com/"
+setCORS("http://cors-anywhere.herokuapp.com/");
 
 const rInp = document.getElementById("root__input");
 const rTra = document.getElementById("translated");

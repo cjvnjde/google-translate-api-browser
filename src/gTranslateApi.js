@@ -62,7 +62,6 @@ var wr = function(a) {
     }
     return a;
   };
-
 /* eslint-enable */
 
 function token(text) {
@@ -73,6 +72,14 @@ function token(text) {
   });
 }
 // ============================
+
+let CORSAnywhere = "http://cors-anywhere.herokuapp.com/";
+
+// setup your own cors-anywhere server
+export const setCORS = CORSURL => {
+  CORSAnywhere = CORSURL;
+};
+
 function translate(text, opts) {
   opts = opts || {};
 
@@ -119,7 +126,7 @@ function translate(text, opts) {
     })
     .then(function(url) {
       return axios
-        .get("http://cors-anywhere.herokuapp.com/" + url)
+        .get(CORSAnywhere + url)
         .then(res_ => {
           const res = {
             body: JSON.stringify(res_.data)
