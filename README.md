@@ -3,10 +3,11 @@ Based on [google-translate-api](https://github.com/matheuss/google-translate-api
 ## Try to use
 
 ```bash
-git clone https://github.com/cjvnjde/google-translate-api-browser.git
-cd google-translate-api-browser
-npm install
-npm run start
+npm install google-translate-api-browser -S
+```
+
+```bash
+yarn add google-translate-api-browser
 ```
 
 For cross origin requests it uses [cors-anywhere
@@ -15,7 +16,7 @@ For cross origin requests it uses [cors-anywhere
 ## Example
 
 ```javascript
-import translate, { setCORS } from "./gTranslateApi";
+import translate, { setCORS } from "google-translate-api-browser";
 
 // setting up cors-anywhere server address
 setCORS("http://cors-anywhere.herokuapp.com/");

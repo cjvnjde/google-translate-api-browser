@@ -1,11 +1,21 @@
 {
   "name": "google-translate-api-browser",
   "version": "1.0.0",
-  "description": "",
+  "description": "A free and unlimited API for Google Translate that works in browser",
   "main": "index.js",
-  "scripts": {
-    "start": "parcel src/index.html"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nvjrsgu/google-translate-api-browser"
   },
+  "keywords": [
+    "translate",
+    "translator",
+    "google",
+    "translate",
+    "api",
+    "free",
+    "language"
+  ],
   "author": {
     "name": "Matheus Fernandes",
     "email": "npm@matheus.top",
@@ -16,8 +26,5 @@
     "axios": "^0.18.0",
     "querystring": "^0.2.0",
     "safe-eval": "^0.4.1"
-  },
-  "devDependencies": {
-    "parcel-bundler": "^1.11.0"
   }
 }
