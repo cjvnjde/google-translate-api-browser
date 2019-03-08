@@ -1,6 +1,6 @@
 Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
 
-## Try to use
+## Install
 
 ```bash
 npm install google-translate-api-browser -S

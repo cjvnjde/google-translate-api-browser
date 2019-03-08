@@ -6,10 +6,12 @@ interface TranslateOptions {
   from: string;
   to: string;
 }
+
 interface Token {
   name: string;
   value: string;
 }
+
 function token(text: string) {
   return new Promise<Token>(resolve => {
     let tk = sM(text);
@@ -25,10 +27,11 @@ export const setCORS = (CORSURL: string): void => {
   CORSAnywhere = CORSURL;
 };
 
-function translate(text: string, to: string, from?: string) {
+// function translate(text: string, to: string, from?: string) {
+function translate(text: string, opts_: { from?: string; to: string }) {
   const opts: TranslateOptions = {
-    from: from || "auto",
-    to: to || "en"
+    from: opts_.from || "auto",
+    to: opts_.to || "en"
   };
 
   let e: Error | null = null;
