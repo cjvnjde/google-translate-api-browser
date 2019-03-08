@@ -3,7 +3,7 @@ Based on [google-translate-api](https://github.com/matheuss/google-translate-api
 ## Install
 
 ```bash
-npm install google-translate-api-browser -S
+npm install google-translate-api-browser
 ```
 
 ```bash
@@ -11,7 +11,7 @@ yarn add google-translate-api-browser
 ```
 
 For cross origin requests it uses [cors-anywhere
-](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server ```https://cors-anywhere.herokuapp.com/``` or set up your own.
+](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server `https://cors-anywhere.herokuapp.com/` or set up your own.
 
 ## Example
 
