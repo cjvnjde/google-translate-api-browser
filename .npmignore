@@ -1,4 +1,4 @@
 *test
 *.ts
-querystring.d.ts
+!/dist
 *node_modules
