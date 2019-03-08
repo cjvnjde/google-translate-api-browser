@@ -1,4 +1,4 @@
-import querystring from "querystring";
+import querystring, { stringify } from "querystring";
 import axios from "axios";
 import sM from "./sM";
 import { isSupported, getCode } from "./languages";
@@ -25,10 +25,12 @@ export const setCORS = (CORSURL: string): void => {
   CORSAnywhere = CORSURL;
 };
 
-function translate(
-  text: string,
-  opts: TranslateOptions = { to: "en", from: "auto" }
-) {
+function translate(text: string, opts_: TranslateOptions) {
+  const opts = {
+    from: opts_.from || "auto",
+    to: opts_.to || "en"
+  };
+
   let e: Error | null = null;
   [opts.from, opts.to].forEach(lang => {
     if (lang && !isSupported(lang)) {
@@ -43,8 +45,6 @@ function translate(
     });
   }
 
-  opts.from = opts.from || "auto";
-  opts.to = opts.to || "en";
   return token(text)
     .then((token: Token) => {
       const url = "https://translate.google.com/translate_a/single";
