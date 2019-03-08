@@ -1,9 +1,9 @@
-import querystring, { stringify } from "querystring";
+import { stringify } from "querystring";
 import axios from "axios";
 import sM from "./sM";
 import { isSupported, getCode } from "./languages";
 interface TranslateOptions {
-  from?: string;
+  from: string;
   to: string;
 }
 interface Token {
@@ -25,10 +25,10 @@ export const setCORS = (CORSURL: string): void => {
   CORSAnywhere = CORSURL;
 };
 
-function translate(text: string, opts_: TranslateOptions) {
-  const opts = {
-    from: opts_.from || "auto",
-    to: opts_.to || "en"
+function translate(text: string, to: string, from?: string) {
+  const opts: TranslateOptions = {
+    from: from || "auto",
+    to: to || "en"
   };
 
   let e: Error | null = null;
@@ -63,7 +63,7 @@ function translate(text: string, opts_: TranslateOptions) {
         q: text
       };
       data[token.name] = token.value;
-      return url + "?" + querystring.stringify(data);
+      return url + "?" + stringify(data);
     })
     .then(url => {
       return axios
