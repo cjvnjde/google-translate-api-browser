@@ -1,0 +1,4 @@
+*test
+*.ts
+querystring.d.ts
+*node_modules
