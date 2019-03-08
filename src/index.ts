@@ -3,7 +3,7 @@ import axios from "axios";
 import sM from "./sM";
 import { isSupported, getCode } from "./languages";
 interface TranslateOptions {
-  from: string;
+  from?: string;
   to: string;
 }
 interface Token {
@@ -25,7 +25,10 @@ export const setCORS = (CORSURL: string): void => {
   CORSAnywhere = CORSURL;
 };
 
-function translate(text: string, opts: TranslateOptions) {
+function translate(
+  text: string,
+  opts: TranslateOptions = { to: "en", from: "auto" }
+) {
   let e: Error | null = null;
   [opts.from, opts.to].forEach(lang => {
     if (lang && !isSupported(lang)) {
