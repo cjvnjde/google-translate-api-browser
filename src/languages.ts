@@ -1,4 +1,8 @@
-const langs = {
+interface Langs {
+  [key: string]: string;
+}
+
+const langs: Langs = {
   auto: "Automatic",
   af: "Afrikaans",
   sq: "Albanian",
@@ -105,12 +109,8 @@ const langs = {
   yo: "Yoruba",
   zu: "Zulu"
 };
-/**
- * Returns the ISO 639-1 code of the desiredLang – if it is supported by Google Translate
- * @param {string} desiredLang – the name or the code of the desired language
- * @returns {string|boolean} The ISO 639-1 code of the language or false if the language is not supported
- */
-export const getCode = desiredLang => {
+
+export const getCode = (desiredLang: string): string | boolean => {
   if (!desiredLang) {
     return false;
   }
@@ -131,12 +131,7 @@ export const getCode = desiredLang => {
   return keys[0] || false;
 };
 
-/**
- * Returns true if the desiredLang is supported by Google Translate and false otherwise
- * @param desiredLang – the ISO 639-1 code or the name of the desired language
- * @returns {boolean}
- */
-export const isSupported = desiredLang => {
+export const isSupported = (desiredLang: string): boolean => {
   return Boolean(getCode(desiredLang));
 };
 
