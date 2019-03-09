@@ -1,6 +1,6 @@
 {
   "name": "google-translate-api-browser",
-  "version": "1.1.47",
+  "version": "1.1.511",
   "description": "A free and unlimited API for Google Translate that works in browser",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,8 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "querystring": "^0.2.0",
-    "safe-eval": "^0.4.1"
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "typescript": "^3.3.3333"
