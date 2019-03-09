@@ -5,6 +5,7 @@ import { isSupported, getCode } from "./languages";
 interface TranslateOptions {
   from: string;
   to: string;
+  raw: boolean;
 }
 
 interface Token {
@@ -29,11 +30,12 @@ export const setCORS = (CORSURL: string) => {
 // function translate(text: string, to: string, from?: string) {
 export function translate(
   text: string,
-  opts_: { from?: string; to?: string } = {}
+  opts_: { from?: string; to?: string; raw?: boolean } = {}
 ) {
   const opts: TranslateOptions = {
     from: opts_.from || "auto",
-    to: opts_.to || "en"
+    to: opts_.to || "en",
+    raw: opts_.raw || false
   };
 
   let e: Error | null = null;
@@ -93,8 +95,12 @@ export function translate(
             raw: ""
           };
 
-          result.raw = res.body;
+          if (opts.raw) {
+            result.raw = res.body;
+          }
+
           const body = JSON.parse(res.body);
+
           body[0].forEach((obj: any) => {
             if (obj[0]) {
               result.text += obj[0];
