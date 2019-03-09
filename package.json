@@ -1,6 +1,6 @@
 {
   "name": "google-translate-api-browser",
-  "version": "1.1.52",
+  "version": "1.1.521",
   "description": "A free and unlimited API for Google Translate that works in browser",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
