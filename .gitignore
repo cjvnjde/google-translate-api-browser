@@ -1,4 +1,3 @@
 *.cache
-/dist
+*dist
 *node_modules
-/test
