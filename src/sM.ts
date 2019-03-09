@@ -28,7 +28,7 @@ export default function sM(a: string) {
   a_ ^= 0;
   0 > a_ && (a_ = (a_ & 2147483647) + 2147483648);
   a_ %= 1e6;
-  return "&tk=" + (a_.toString() + "." + a_.toString());
+  return a_.toString() + "." + a_.toString();
 }
 
 const xr = function(a: number, b: string) {

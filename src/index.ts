@@ -14,21 +14,23 @@ interface Token {
 
 function token(text: string) {
   return new Promise<Token>(resolve => {
-    let tk = sM(text);
-    tk = tk.replace("&tk=", "");
-    resolve({ name: "tk", value: tk });
+    resolve({ name: "tk", value: sM(text) });
   });
 }
 
-let CORSAnywhere = "http://cors-anywhere.herokuapp.com/";
+let CORSService: string = "";
 
 // setup your own cors-anywhere server
-export const setCORS = (CORSURL: string): void => {
-  CORSAnywhere = CORSURL;
+export const setCORS = (CORSURL: string) => {
+  CORSService = CORSURL;
+  return translate;
 };
 
 // function translate(text: string, to: string, from?: string) {
-function translate(text: string, opts_: { from?: string; to: string }) {
+export function translate(
+  text: string,
+  opts_: { from?: string; to?: string } = {}
+) {
   const opts: TranslateOptions = {
     from: opts_.from || "auto",
     to: opts_.to || "en"
@@ -70,7 +72,7 @@ function translate(text: string, opts_: { from?: string; to: string }) {
     })
     .then(url => {
       return axios
-        .get(CORSAnywhere + url)
+        .get(CORSService + url)
         .then(res_ => {
           const res = {
             body: JSON.stringify(res_.data)
