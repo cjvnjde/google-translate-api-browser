@@ -67,9 +67,9 @@ export function translate(
         ssel: 0,
         tsel: 0,
         kc: 7,
-        q: text
+        q: text,
+        [token.name]: token.value
       };
-      data[token.name] = token.value;
       return url + "?" + stringify(data);
     })
     .then(url => {
