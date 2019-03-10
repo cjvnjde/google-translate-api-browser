@@ -92,12 +92,8 @@ export function translate(
                 didYouMean: false
               }
             },
-            raw: ""
+            raw: opts.raw ? res.body : ""
           };
-
-          if (opts.raw) {
-            result.raw = res.body;
-          }
 
           const body = JSON.parse(res.body);
 
