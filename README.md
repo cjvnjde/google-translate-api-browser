@@ -63,6 +63,16 @@ rl.on("line", function(line) {
 
 ## API
 
+### setCORS(corsServerAddress)
+
+#### corsServerAddress
+
+Type: `string`
+
+Address of CORS server for proxying requests to google translate.
+
+### Returns a `translate` function
+
 ### translate(text, options)
 
 #### text
@@ -95,23 +105,26 @@ If `true`, the returned object will have a `raw` property with the raw response 
 
 ### Returns an `object`:
 
-- `text` *(string)* – The translated text.
-- `from` *(object)*
-  - `language` *(object)*
-    - `didYouMean` *(boolean)* - `true` if the API suggest a correction in the source language
-    - `iso` *(string)* - The [code of the language](https://github.com/matheuss/google-translate-api/blob/master/languages.js) that the API has recognized in the `text`
-  - `text` *(object)*
-    - `autoCorrected` *(boolean)* – `true` if the API has auto corrected the `text`
-    - `value` *(string)* – The auto corrected `text` or the `text` with suggested corrections
-    - `didYouMean` *(booelan)* – `true` if the API has suggested corrections to the `text`
-- `raw` *(string)* - If `options.raw` is true, the raw response from Google Translate servers. Otherwise, `''`.
+- `text` _(string)_ – The translated text.
+- `from` _(object)_
+  - `language` _(object)_
+    - `didYouMean` _(boolean)_ - `true` if the API suggest a correction in the source language
+    - `iso` _(string)_ - The [code of the language](https://github.com/matheuss/google-translate-api/blob/master/languages.js) that the API has recognized in the `text`
+  - `text` _(object)_
+    - `autoCorrected` _(boolean)_ – `true` if the API has auto corrected the `text`
+    - `value` _(string)_ – The auto corrected `text` or the `text` with suggested corrections
+    - `didYouMean` _(booelan)_ – `true` if the API has suggested corrections to the `text`
+- `raw` _(string)_ - If `options.raw` is true, the raw response from Google Translate servers. Otherwise, `''`.
 
 Note that `res.from.text` will only be returned if `from.text.autoCorrected` or `from.text.didYouMean` equals to `true`. In this case, it will have the corrections delimited with brackets (`[ ]`):
 
-``` js
-translate('I spea Dutch').then(res => {
+```js
+translate("I spea Dutch")
+  .then(res => {
     console.log(res.from.text.value);
     //=> I [speak] Dutch
-}).catch(err => {
+  })
+  .catch(err => {
     console.error(err);
-});
+  });
+```
