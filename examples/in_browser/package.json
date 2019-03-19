@@ -10,7 +10,7 @@
     "parcel-bundler": "^1.11.0"
   },
   "dependencies": {
-    "google-translate-api-browser": "^1.1.51",
+    "google-translate-api-browser": "^1.1.6",
     "querystring": "^0.2.0",
     "typescript": "^3.3.3333"
   }

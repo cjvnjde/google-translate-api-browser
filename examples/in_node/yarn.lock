@@ -24,10 +24,10 @@ follow-redirects@^1.3.0:
   dependencies:
     debug "^3.2.6"
 
-google-translate-api-browser@^1.1.51:
-  version "1.1.51"
-  resolved "https://registry.yarnpkg.com/google-translate-api-browser/-/google-translate-api-browser-1.1.51.tgz#f21b71ceae78b67d6643c7df54e4b396fa3a54a7"
-  integrity sha512-G8EB9fH6t1s5tVmu9XTLA1w4PRLpdw2Ob5VHUTije+d/GkxdfFNrMXlWgw0//69HWHCdF1BBs83yvGOiFlMoOg==
+google-translate-api-browser@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/google-translate-api-browser/-/google-translate-api-browser-1.1.6.tgz#95e5ba9946191f8f12672b09ddf7648252f64ec5"
+  integrity sha512-JwDjw2dnrp0/jrpab5CnjG15NYUb7myWlYSNlFLYzDAX5+gsmsyiaAtjAgK4bqLc5R4OAncSilRnh9xqdPaXeA==
   dependencies:
     axios "^0.18.0"
     querystring "^0.2.0"

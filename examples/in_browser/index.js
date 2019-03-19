@@ -1,8 +1,9 @@
 import { setCORS } from "google-translate-api-browser";
+// import { setCORS } from "../../src/index";
 
 // setting up cors-anywhere server address
 const translate = setCORS("http://cors-anywhere.herokuapp.com/");
-
+console.log(translate);
 const rInp = document.getElementById("root__input");
 const rTra = document.getElementById("translated");
 const rBut = document.getElementById("root__button");
