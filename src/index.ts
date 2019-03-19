@@ -27,15 +27,16 @@ export const setCORS = (CORSURL: string) => {
   return translate;
 };
 
-// function translate(text: string, to: string, from?: string) {
+// function translate(text: string, to: string, from: string, tld: string) {
 export function translate(
   text: string,
-  opts_: { from?: string; to?: string; raw?: boolean } = {}
+  opts_: { from?: string; to?: string; tld?: string; raw?: boolean } = {}
 ) {
   const opts: TranslateOptions = {
     from: opts_.from || "auto",
     to: opts_.to || "en",
-    raw: opts_.raw || false
+    raw: opts_.raw || false,
+    tld: opts_.tld || "com"
   };
 
   let e: Error | null = null;
@@ -54,7 +55,7 @@ export function translate(
 
   return token(text)
     .then((token: Token) => {
-      const url = "https://translate.google.com/translate_a/single";
+      const url = "https://translate.google." + opts.tld + "/translate_a/single";
       const data = {
         client: "gtx",
         sl: getCode(opts.from),
