@@ -6,6 +6,7 @@ interface TranslateOptions {
   from: string;
   to: string;
   raw: boolean;
+  tld: string;
 }
 
 interface Token {
@@ -55,7 +56,8 @@ export function translate(
 
   return token(text)
     .then((token: Token) => {
-      const url = "https://translate.google." + opts.tld + "/translate_a/single";
+      const url =
+        "https://translate.google." + opts.tld + "/translate_a/single";
       const data = {
         client: "gtx",
         sl: getCode(opts.from),
