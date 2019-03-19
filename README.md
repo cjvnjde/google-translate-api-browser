@@ -113,7 +113,7 @@ If `true`, the returned object will have a `raw` property with the raw response 
   - `text` _(object)_
     - `autoCorrected` _(boolean)_ – `true` if the API has auto corrected the `text`
     - `value` _(string)_ – The auto corrected `text` or the `text` with suggested corrections
-    - `didYouMean` _(booelan)_ – `true` if the API has suggested corrections to the `text`
+    - `didYouMean` _(boolean)_ – `true` if the API has suggested corrections to the `text`
 - `raw` _(string)_ - If `options.raw` is true, the raw response from Google Translate servers. Otherwise, `''`.
 
 Note that `res.from.text` will only be returned if `from.text.autoCorrected` or `from.text.didYouMean` equals to `true`. In this case, it will have the corrections delimited with brackets (`[ ]`):
