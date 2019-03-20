@@ -7,6 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "google-translate-api-browser": "^1.1.6"
+    "google-translate-api-browser": "latest"
   }
 }

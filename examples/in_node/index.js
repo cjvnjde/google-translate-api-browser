@@ -1,4 +1,6 @@
 var { translate } = require("google-translate-api-browser");
+// var { translate } = require("../../dist/index");
+
 var readline = require("readline");
 console.log(translate);
 var rl = readline.createInterface(process.stdin, process.stdout);

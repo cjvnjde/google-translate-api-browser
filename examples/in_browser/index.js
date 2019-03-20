@@ -1,5 +1,5 @@
 import { setCORS } from "google-translate-api-browser";
-// import { setCORS } from "../../src/index";
+// import { setCORS } from "../../dist/index";
 
 // setting up cors-anywhere server address
 const translate = setCORS("http://cors-anywhere.herokuapp.com/");
