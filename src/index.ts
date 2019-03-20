@@ -73,7 +73,8 @@ export function translate(
         q: text,
         [token.name]: token.value
       };
-      var fullUrl = url + '?' + stringify(data);
+      var fullUrl = url + "?" + stringify(data);
+      /*
         if (fullUrl.length > 2083) {
             delete data.q;
             return [
@@ -81,7 +82,8 @@ export function translate(
                 {method: 'POST', body: {q: text}}
             ];
         }
-        return [fullUrl];
+        */
+      return fullUrl;
     })
     .then(url => {
       return axios
@@ -112,7 +114,7 @@ export function translate(
           body[0].forEach((obj: any) => {
             if (obj[0]) {
               result.text += obj[0];
-            }else if (obj[2]) {
+            } else if (obj[2]) {
               result.pronunciation += obj[2];
             }
           });
