@@ -6,6 +6,8 @@ Based on [google-translate-api](https://github.com/matheuss/google-translate-api
 npm install google-translate-api-browser
 ```
 
+or
+
 ```bash
 yarn add google-translate-api-browser
 ```
