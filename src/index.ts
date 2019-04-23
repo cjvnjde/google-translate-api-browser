@@ -5,6 +5,7 @@ import { isSupported, getCode } from "./languages";
 interface TranslateOptions {
   from: string;
   to: string;
+  hl: string;
   raw: boolean;
   tld: string;
 }
@@ -31,11 +32,12 @@ export const setCORS = (CORSURL: string) => {
 // function translate(text: string, to: string, from: string, tld: string) {
 export function translate(
   text: string,
-  opts_: { from?: string; to?: string; tld?: string; raw?: boolean } = {}
+  opts_: { from?: string; to?: string; hl?: string; tld?: string; raw?: boolean } = {}
 ) {
   const opts: TranslateOptions = {
     from: opts_.from || "auto",
     to: opts_.to || "en",
+    hl: opts_.hl || "en",
     raw: opts_.raw || false,
     tld: opts_.tld || "com"
   };
@@ -62,7 +64,7 @@ export function translate(
         client: "gtx",
         sl: getCode(opts.from),
         tl: getCode(opts.to),
-        hl: getCode(opts.to),
+        hl: getCode(opts.hl),
         dt: ["at", "bd", "ex", "ld", "md", "qca", "rw", "rm", "ss", "t"],
         ie: "UTF-8",
         oe: "UTF-8",
