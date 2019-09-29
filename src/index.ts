@@ -88,8 +88,13 @@ export function translate(
       return fullUrl;
     })
     .then(url => {
+      let config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        }
+      }
       return axios
-        .get(CORSService + url)
+        .get(CORSService + url, config)
         .then(res_ => {
           const res = {
             body: JSON.stringify(res_.data)
