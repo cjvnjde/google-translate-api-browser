@@ -91,6 +91,7 @@ export function translate(
       let config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "x-requested-with": "XMLHttpRequest"
         }
       }
       return axios
