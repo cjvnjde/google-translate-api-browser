@@ -36,7 +36,6 @@ translate("Je ne mangé pas six jours", { to: "en" })
   .catch(err => {
     console.error(err);
   });
-};
 ```
 
 For node
