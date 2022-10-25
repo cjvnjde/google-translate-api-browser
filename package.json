@@ -9,6 +9,7 @@
     "url": "https://github.com/cjvnjde/google-translate-api-browser"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc --declaration"
   },
   "keywords": [
