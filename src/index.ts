@@ -1,165 +1,72 @@
-import { stringify } from "querystring";
-import axios from "axios";
+import {getCode, isSupported} from "./languages";
 import sM from "./sM";
-import { isSupported, getCode } from "./languages";
-interface TranslateOptions {
-  from: string;
-  to: string;
-  hl: string;
-  raw: boolean;
-  tld: string;
+import {normaliseResponse, TranslationResult} from "./normaliseTranslateResponse";
+
+type TranslateOptions = {
+    from: string;
+    to: string;
+    hl: string;
+    raw: boolean;
+    tld: string;
 }
 
-interface Token {
-  name: string;
-  value: string;
-}
+const defaultTranslateOptions: TranslateOptions = {
+    from: "auto",
+    to: "en",
+    hl: "en",
+    raw: false,
+    tld: "com"
+};
 
-function token(text: string) {
-  return new Promise<Token>(resolve => {
-    resolve({ name: "tk", value: sM(text) });
-  });
-}
-
-let CORSService: string = "";
+let CORSUrl: string = "";
 
 // setup your own cors-anywhere server
 export const setCORS = (CORSURL: string) => {
-  CORSService = CORSURL;
-  return translate;
+    CORSUrl = CORSURL;
+    return translate;
 };
 
-// function translate(text: string, to: string, from: string, tld: string) {
-export function translate(
-  text: string,
-  opts_: { from?: string; to?: string; hl?: string; tld?: string; raw?: boolean } = {}
-) {
-  const opts: TranslateOptions = {
-    from: opts_.from || "auto",
-    to: opts_.to || "en",
-    hl: opts_.hl || "en",
-    raw: opts_.raw || false,
-    tld: opts_.tld || "com"
-  };
+export function generateRequestUrl(text: string, options: Partial<TranslateOptions>): string {
+    const translateOptions = {...defaultTranslateOptions, ...options};
 
-  let e: Error | null = null;
-  [opts.from, opts.to].forEach(lang => {
-    if (lang && !isSupported(lang)) {
-      e = new Error();
-      e.message = "The language '" + lang + "' is not supported";
-    }
-  });
-
-  if (e) {
-    return new Promise((resolve, reject) => {
-      reject(e);
+    [translateOptions.from, translateOptions.to].forEach(lang => {
+        if (!lang || !isSupported(lang)) {
+            throw new Error(`"The language '${lang}' is not supported"`);
+        }
     });
-  }
 
-  return token(text)
-    .then((token: Token) => {
-      const url =
-        "https://translate.google." + opts.tld + "/translate_a/single";
-      const data = {
+    const queryParams = {
         client: "gtx",
-        sl: getCode(opts.from),
-        tl: getCode(opts.to),
-        hl: getCode(opts.hl),
-        dt: ["at", "bd", "ex", "ld", "md", "qca", "rw", "rm", "ss", "t"],
+        sl: getCode(translateOptions.from),
+        tl: getCode(translateOptions.to),
+        hl: getCode(translateOptions.hl),
         ie: "UTF-8",
         oe: "UTF-8",
-        otf: 1,
-        ssel: 0,
-        tsel: 0,
-        kc: 7,
+        otf: '1',
+        ssel: '0',
+        tsel: '0',
+        kc: '7',
         q: text,
-        [token.name]: token.value
-      };
-      var fullUrl = url + "?" + stringify(data);
-      /*
-        if (fullUrl.length > 2083) {
-            delete data.q;
-            return [
-                url + '?' + stringify(data),
-                {method: 'POST', body: {q: text}}
-            ];
-        }
-        */
-      return fullUrl;
-    })
-    .then(url => {
-      let config = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "x-requested-with": "XMLHttpRequest"
-        }
-      }
-      return axios
-        .get(CORSService + url, config)
-        .then(res_ => {
-          const res = {
-            body: JSON.stringify(res_.data)
-          };
-          const result = {
-            text: "",
-            pronunciation: "",
-            from: {
-              language: {
-                didYouMean: false,
-                iso: ""
-              },
-              text: {
-                autoCorrected: false,
-                value: "",
-                didYouMean: false
-              }
-            },
-            raw: opts.raw ? res.body : ""
-          };
+        tk: sM(text)
+    };
+    const searchParams = new URLSearchParams(queryParams);
 
-          const body = JSON.parse(res.body);
+    [
+        "at", "bd", "ex", "ld", "md", "qca", "rw", "rm", "ss", "t"
+    ].forEach(l => searchParams.append('dt', l))
+    return `https://translate.google.${translateOptions.tld}/translate_a/single?${searchParams}`;
+}
 
-          body[0].forEach((obj: any) => {
-            if (obj[0]) {
-              result.text += obj[0];
-            } else if (obj[2]) {
-              result.pronunciation += obj[2];
-            }
-          });
+async function translate(text: string, options: Partial<TranslateOptions> = {}): Promise<TranslationResult> {
+    const translateUrl = generateRequestUrl(text, options);
+    const response = await fetch(`${CORSUrl}${translateUrl}`);
 
-          if (body[2] === body[8][0][0]) {
-            result.from.language.iso = body[2];
-          } else {
-            result.from.language.didYouMean = true;
-            result.from.language.iso = body[8][0][0];
-          }
+    if (!response.ok) {
+        throw new Error('Request failed')
+    }
 
-          if (body[7] && body[7][0]) {
-            let str = body[7][0];
-
-            str = str.replace(/<b><i>/g, "[");
-            str = str.replace(/<\/i><\/b>/g, "]");
-
-            result.from.text.value = str;
-
-            if (body[7][5] === true) {
-              result.from.text.autoCorrected = true;
-            } else {
-              result.from.text.didYouMean = true;
-            }
-          }
-          return result;
-        })
-        .catch(err => {
-          const e: Error = new Error();
-          if (err.statusCode !== undefined && err.statusCode !== 200) {
-            e.message = "BAD_REQUEST";
-          } else {
-            e.message = "BAD_NETWORK";
-          }
-          throw e;
-        });
-    });
+    const body = await response.json()
+    return normaliseResponse(body)
 }
 
 export default translate;

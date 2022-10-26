@@ -2,3 +2,5 @@
 *.ts
 !/dist/*.ts
 *node_modules
+.idea
+.parcel-cache

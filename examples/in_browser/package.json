@@ -8,11 +8,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "parcel-bundler": "^1.11.0"
+    "parcel": "^2.7.0"
   },
   "dependencies": {
-    "google-translate-api-browser": "latest",
-    "querystring": "^0.2.0",
-    "typescript": "^3.3.3333"
+    "typescript": "4.8.4"
   }
 }

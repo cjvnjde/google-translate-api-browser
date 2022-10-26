@@ -117,25 +117,26 @@ const langs: Langs = {
   zu: "Zulu"
 };
 
-export const getCode = (desiredLang: string): string | boolean => {
+export const getCode = (desiredLang: string): string => {
   if (!desiredLang) {
-    return false;
-  }
-  desiredLang = desiredLang.toLowerCase();
-
-  if (langs[desiredLang]) {
-    return desiredLang;
+    throw new Error('Desired language not specified');
   }
 
-  const keys = Object.keys(langs).filter(key => {
-    if (typeof langs[key] !== "string") {
-      return false;
-    }
+  const desiredLangLower = desiredLang.toLocaleLowerCase()
 
-    return langs[key].toLowerCase() === desiredLang;
+  if (langs[desiredLangLower]) {
+    return desiredLangLower;
+  }
+
+  const language = Object.keys(langs).find(language => {
+    return language.toLowerCase() === desiredLangLower;
   });
 
-  return keys[0] || false;
+  if (!language) {
+    throw new Error('Language not found');
+  }
+
+  return language;
 };
 
 export const isSupported = (desiredLang: string): boolean => {
