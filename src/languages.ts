@@ -1,8 +1,4 @@
-interface Langs {
-  [key: string]: string;
-}
-
-const langs: Langs = {
+const langs = {
   auto: "Automatic",
   af: "Afrikaans",
   sq: "Albanian",
@@ -115,32 +111,12 @@ const langs: Langs = {
   yi: "Yiddish",
   yo: "Yoruba",
   zu: "Zulu"
-};
+} as const;
 
-export const getCode = (desiredLang: string): string => {
-  if (!desiredLang) {
-    throw new Error('Desired language not specified');
-  }
+export type LangKey = keyof typeof langs;
 
-  const desiredLangLower = desiredLang.toLocaleLowerCase()
-
-  if (langs[desiredLangLower]) {
-    return desiredLangLower;
-  }
-
-  const language = Object.keys(langs).find(language => {
-    return language.toLowerCase() === desiredLangLower;
-  });
-
-  if (!language) {
-    throw new Error('Language not found');
-  }
-
-  return language;
-};
-
-export const isSupported = (desiredLang: string): boolean => {
-  return Boolean(getCode(desiredLang));
+export const isSupported = (desiredLang: LangKey): boolean => {
+  return Boolean(langs[desiredLang]);
 };
 
 export default langs;

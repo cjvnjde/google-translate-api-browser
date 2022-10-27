@@ -1,15 +1,13 @@
+# Google translate api browser
+
+[![npm - 2.0.0](https://img.shields.io/badge/npm-2.0.0-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
+
 Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
 
 ## Install
 
 ```bash
 npm install google-translate-api-browser
-```
-
-or
-
-```bash
-yarn add google-translate-api-browser
 ```
 
 For cross origin requests it uses [cors-anywhere
@@ -79,6 +77,11 @@ The language in which the text should be translated. Must be one of the codes/na
 Type: `boolean` Default: `false`
 
 If `true`, the returned object will have a `raw` property with the raw response (`string`) from Google Translate.
+
+##### client
+
+Type: `'gtx' | 'webapp'` Default: `gtx`
+
 
 ### Returns an `object`:
 
