@@ -1,6 +1,6 @@
 # Google translate api browser
 
-[![npm - 2.1.0](https://img.shields.io/badge/npm-2.0.0-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
+[![npm - 2.1.0](https://img.shields.io/badge/npm-2.1.0-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
 
 Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
 
