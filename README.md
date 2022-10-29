@@ -15,7 +15,7 @@ For cross origin requests it uses [cors-anywhere
 
 ## Examples
 
-For browser
+#### For browser
 
 ```javascript
 import { setCORS } from "google-translate-api-browser";
@@ -36,75 +36,90 @@ translate("Je ne mangé pas six jours", { to: "en" })
   });
 ```
 
+#### For node
+
+You don't need to use CORS for node
+
+```javascript
+const { generateRequestUrl, normaliseResponse } = require('google-translate-api-browser');
+const https = require('https');
+
+const url = generateRequestUrl('Je ne mangé pas six jours', { to: "en" });
+
+https.get(url, (resp) => {
+  let data = '';
+
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  resp.on('end', () => {
+    console.log(normaliseResponse(JSON.parse(data)));
+  });
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+```
+
 ## API
 
-### setCORS(corsServerAddress)
+### isSupported(lang: string): boolean
+Verifies if the selected language is supported by Google Translate.
 
-#### corsServerAddress
-
-Type: `string`
-
-Address of CORS server for proxying requests to google translate.
-
-### Returns a `translate` function
-
-### translate(text, options)
+### translate(text: string, options: Partial<TranslateOptions>): Promise<TranslationResult>
 
 #### text
-
-Type: `string`
-
 The text to be translated
 
 #### options
-
-Type: `object`
-
-##### from
-
-Type: `string` Default: `auto`
-
-The `text` language. Must be `auto` or one of the codes/names (not case sensitive) contained in [languages.js](https://github.com/matheuss/google-translate-api/blob/master/languages.js)
-
-##### to
-
-Type: `string` Default: `en`
-
-The language in which the text should be translated. Must be one of the codes/names (not case sensitive) contained in [languages.js](https://github.com/matheuss/google-translate-api/blob/master/languages.js).
-
-##### raw
-
-Type: `boolean` Default: `false`
-
-If `true`, the returned object will have a `raw` property with the raw response (`string`) from Google Translate.
-
-##### client
-
-Type: `'gtx' | 'webapp'` Default: `gtx`
-
-
-### Returns an `object`:
-
-- `text` _(string)_ – The translated text.
-- `from` _(object)_
-  - `language` _(object)_
-    - `didYouMean` _(boolean)_ - `true` if the API suggest a correction in the source language
-    - `iso` _(string)_ - The [code of the language](https://github.com/matheuss/google-translate-api/blob/master/languages.js) that the API has recognized in the `text`
-  - `text` _(object)_
-    - `autoCorrected` _(boolean)_ – `true` if the API has auto corrected the `text`
-    - `value` _(string)_ – The auto corrected `text` or the `text` with suggested corrections
-    - `didYouMean` _(boolean)_ – `true` if the API has suggested corrections to the `text`
-- `raw` _(string)_ - If `options.raw` is true, the raw response from Google Translate servers. Otherwise, `''`.
-
-Note that `res.from.text` will only be returned if `from.text.autoCorrected` or `from.text.didYouMean` equals to `true`. In this case, it will have the corrections delimited with brackets (`[ ]`):
-
-```js
-translate("I spea Dutch")
-  .then(res => {
-    console.log(res.from.text.value);
-    //=> I [speak] Dutch
-  })
-  .catch(err => {
-    console.error(err);
-  });
+```typescript
+type TranslateOptions = {
+  client: 'gtx' | 'webapp';
+  from: LangKey;
+  to: LangKey;
+  hl: LangKey;
+  raw: boolean;
+  tld: string;
+}
 ```
+##### example
+```typescript
+const options = {
+  client: 'gtx',
+  from: 'ua',
+  to: 'en',
+  hl: 'en',
+  raw: false,
+  tld: 'com',
+}
+```
+#### returns
+```typescript
+type TranslationResult = {
+  text: string; // The translated text.
+  pronunciation: string;
+  from: {
+    language: {
+      didYouMean: boolean; // `true` if the API suggest a correction in the source language
+      iso: string; // The code of the language that the API has recognized in the `text`
+    };
+    text: {
+      autoCorrected: boolean; // `true` if the API has auto corrected the `text`
+      value: string; // The auto corrected `text` or the `text` with suggested corrections
+      didYouMean: boolean; // `true` if the API has suggested corrections to the `text`
+    }
+  };
+  raw?: any; // If `options.raw` is true, the raw response from Google Translate servers
+}
+```
+
+Note that `from.text` will only be returned if `from.text.autoCorrected` or `from.text.didYouMean` equals to `true`. In this case, it will have the corrections delimited with brackets (`[ ]`):
+
+
+### normaliseResponse(body: any, raw = false): TranslationResult
+Formats the google translate response.
+
+### generateRequestUrl(text: string, options: Partial<Omit<TranslateOptions, 'raw'>>): string
+Generates a url to google translate api.
+
+### setCORS(CORSURL: string): translate
