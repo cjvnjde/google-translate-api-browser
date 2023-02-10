@@ -1,15 +1,11 @@
 const path = require('path');
 
+
 module.exports = () => {
-    return {
+    const baseConfig = {
         mode: 'production',
         entry: './src/index.ts',
         devtool: 'source-map',
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: 'index.js',
-            libraryTarget: 'commonjs2'
-        },
         module: {
             rules: [
                 {
@@ -23,4 +19,27 @@ module.exports = () => {
             extensions: ['.ts'],
         },
     }
+
+    return [{
+        ...baseConfig,
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: 'cjs.js',
+            library: {
+                type: "commonjs2"
+            },
+        },
+    }, {
+        ...baseConfig,
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: 'esm.js',
+            library: {
+                type: "module"
+            },
+        },
+        experiments: {
+            outputModule: true
+        }
+    }]
 };
