@@ -17,52 +17,40 @@ export type TranslationResult = {
   raw?: any;
 }
 
-export function normaliseResponse(body: any, raw = false): TranslationResult {
+export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
+  const content = rawBody.match(/"\[\[.*]]"/)
+
+  let data: any[] | null = null
+
+  if (content) {
+    let valuableContent = content[0]
+    valuableContent.substring(1, valuableContent.length - 1)
+
+    data = JSON.parse(JSON.parse(valuableContent))
+  }
+
+  if (!data) {
+    throw new Error('No data')
+  }
+
   const result: TranslationResult = {
-    text: '',
-    pronunciation: '',
+    text: data[1][0][0][5][0][0],
+    pronunciation: data[0][0],
     from: {
       language: {
-        didYouMean: false,
-        iso: '',
+        didYouMean: Boolean(data[0][1]),
+        iso: data[2],
       },
       text: {
-        autoCorrected: false,
-        value: '',
-        didYouMean: false,
+        autoCorrected: Boolean(data[1][0][0][3]),
+        value: Boolean(data[0][1]) ? data[0][1][0][4] : data[0][6][0],
+        didYouMean: Boolean(data[0][1]),
       },
     },
   };
-  body[0].forEach((obj: any) => {
-    if (obj[0]) {
-      result.text += obj[0];
-    } else if (obj[2]) {
-      result.pronunciation += obj[2];
-    }
-  });
-  if (body[2] === body[8][0][0]) {
-    result.from.language.iso = body[2];
-  } else {
-    result.from.language.didYouMean = true;
-    result.from.language.iso = body[8][0][0];
-  }
-  if (body[7] && body[7][0]) {
-    let str = body[7][0];
-
-    str = str.replace(/<b><i>/g, '[');
-    str = str.replace(/<\/i><\/b>/g, ']');
-
-    result.from.text.value = str;
-
-    if (body[7][5] === true) {
-      result.from.text.autoCorrected = true;
-    } else {
-      result.from.text.didYouMean = true;
-    }
-  }
 
   if (raw) {
-    result.raw = body;
+    result.raw = rawBody;
   }
 
   return result;

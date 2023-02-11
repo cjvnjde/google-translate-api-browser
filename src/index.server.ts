@@ -1,14 +1,13 @@
 import { generateRequestUrl } from './generateRequestUrl';
 import { isSupported } from './languages';
 import { normaliseResponse } from './normaliseResponse';
-import { translate, setCORS } from './translate';
+import { translate } from './translate.server';
 
 export {
   isSupported,
   translate,
   normaliseResponse,
   generateRequestUrl,
-  setCORS,
 };
 
 export default translate;

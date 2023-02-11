@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  google-translate-api-browser: ^4.0.6
+
+dependencies:
+  google-translate-api-browser: 4.0.6
+
+packages:
+
+  /google-translate-api-browser/4.0.6:
+    resolution: {integrity: sha512-pbQg+72GA/mtWQ1Wrwhb6X29xBxoq8V2kBJGFbo4cJhS7YSl5vGu81HjiPzTObbFxm0Y3TnfnF7uet+zMWcKQQ==}
+    dev: false

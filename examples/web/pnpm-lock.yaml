@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  google-translate-api-browser: ^3.0.1
+  google-translate-api-browser: ^4.0.6
   vite: ^4.1.0
 
 dependencies:
-  google-translate-api-browser: 3.0.1
+  google-translate-api-browser: 4.0.6
 
 devDependencies:
   vite: 4.1.1
@@ -252,8 +252,8 @@ packages:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
     dev: true
 
-  /google-translate-api-browser/3.0.1:
-    resolution: {integrity: sha512-KTLodkyGBWMK9IW6QIeJ2zCuju4Z0CLpbkADKo+yLhbSTD4l+CXXpQ/xaynGVAzeBezzJG6qn8MLeqOq3SmW0A==}
+  /google-translate-api-browser/4.0.6:
+    resolution: {integrity: sha512-pbQg+72GA/mtWQ1Wrwhb6X29xBxoq8V2kBJGFbo4cJhS7YSl5vGu81HjiPzTObbFxm0Y3TnfnF7uet+zMWcKQQ==}
     dev: false
 
   /has/1.0.3:

@@ -5,5 +5,8 @@
   "scripts": {
     "start": "node index.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "google-translate-api-browser": "^4.0.6"
+  }
 }
