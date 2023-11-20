@@ -18,13 +18,12 @@ export type TranslationResult = {
 }
 
 export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
-  const content = rawBody.match(/"\[\[.*]]"/)
+  const content = rawBody.match(/"\[.*]"/)
 
   let data: any[] | null = null
 
   if (content) {
     let valuableContent = content[0]
-    valuableContent.substring(1, valuableContent.length - 1)
 
     data = JSON.parse(JSON.parse(valuableContent))
   }
