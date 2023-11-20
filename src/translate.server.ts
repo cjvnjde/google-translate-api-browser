@@ -1,10 +1,10 @@
 import { generateRequestUrl } from "./generateRequestUrl";
 import { defaultTranslateOptions } from "./defaultTranslateOptions";
 import { TranslateOptions } from "./TranslateOptions";
-import { normaliseResponse } from "./normaliseResponse";
-import * as https from 'https';
+import { normaliseResponse, TranslationResult } from "./normaliseResponse";
+import * as https from 'node:https';
 
-export function translate(text: string, options: Partial<TranslateOptions> = {}) {
+export function translate(text: string, options: Partial<TranslateOptions> = {}): Promise<TranslationResult> {
   const translateOptions = { ...defaultTranslateOptions, ...options };
 
   return new Promise((resolve, reject) => {

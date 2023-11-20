@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 
 module.exports = () => {
@@ -10,7 +10,7 @@ module.exports = () => {
         {
           test: /\.(ts|tsx)$/i,
           loader: 'ts-loader',
-          exclude: ['/node_modules/'],
+          exclude: ['/node_modules/', '/examples/'],
         },
       ],
     },
