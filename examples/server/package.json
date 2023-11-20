@@ -1,12 +1,15 @@
 {
   "name": "in_node",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "node index.js"
+    "start": "bun run index.ts"
   },
   "license": "MIT",
-  "dependencies": {
-    "google-translate-api-browser": "^4.0.6"
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
