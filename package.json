@@ -1,10 +1,7 @@
 {
   "name": "google-translate-api-browser",
-  "version": "3.0.1",
+  "version": "4.1.1",
   "description": "A free and unlimited API for Google Translate that works in browser",
-  "main": "dist/cjs.js",
-  "module": "dist/esm.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/cjvnjde/google-translate-api-browser"
@@ -14,8 +11,17 @@
     "watch": "webpack --watch"
   },
   "exports": {
-    "import": "./dist/esm.js",
-    "require": "./dist/cjs.js"
+    "types": {
+      "node": "./dist/index.server.d.ts",
+      "browser": "./dist/index.browser.d.ts"
+    },
+    "node": {
+      "require": "./dist/node/cjs.js"
+    },
+    "browser": {
+      "require": "./dist/browser/cjs.js",
+      "import": "./dist/browser/esm.js"
+    }
   },
   "keywords": [
     "translate",
@@ -27,15 +33,15 @@
     "language"
   ],
   "author": {
-    "name": "Matheus Fernandes",
-    "email": "npm@matheus.top",
-    "url": "http://matheus.top"
+    "name": "Vitalij Nykyforenko",
+    "email": "vitalij.nykyforenko@gmail.com"
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "ts-loader": "^9.4.2",
     "typescript": "4.9.5",
-    "webpack": "^5.75.0",
+    "webpack": "^5.89.0",
     "webpack-cli": "^5.0.1"
   }
 }

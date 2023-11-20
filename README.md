@@ -1,6 +1,6 @@
 # Google translate api browser
 
-[![npm - 3.0.1](https://img.shields.io/badge/npm-3.0.1-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
+[![npm - 4.1.1](https://img.shields.io/badge/npm-4.1.1-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
 
 Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
 
@@ -18,15 +18,9 @@ For cross origin requests it uses [cors-anywhere
 #### For browser
 
 ```javascript
-import { setCORS } from "google-translate-api-browser";
-// setting up cors-anywhere server address
-const translate = setCORS("http://cors-anywhere.herokuapp.com/");
-/*
-// or
-import translate, { setCORS } from "google-translate-api-browser";
-setCORS("http://cors-anywhere.herokuapp.com/");
-*/
-translate("Je ne mangé pas six jours", { to: "en" })
+import { translate } from "google-translate-api-browser";
+
+translate("Je ne mangé pas six jours", { to: "en", corsUrl: "http://cors-anywhere.herokuapp.com/" })
   .then(res => {
     // I do not eat six days
     console.log(res.text)
@@ -41,24 +35,16 @@ translate("Je ne mangé pas six jours", { to: "en" })
 You don't need to use CORS for node
 
 ```javascript
-const { generateRequestUrl, normaliseResponse } = require('google-translate-api-browser');
-const https = require('https');
+const { translate } = require('google-translate-api-browser');
 
-const url = generateRequestUrl('Je ne mangé pas six jours', { to: "en" });
-
-https.get(url, (resp) => {
-  let data = '';
-
-  resp.on('data', (chunk) => {
-    data += chunk;
+translate("Je ne mangé pas six jours", { to: "en" })
+  .then(res => {
+    // I do not eat six days
+    console.log(res.text)
+  })
+  .catch(err => {
+    console.error(err);
   });
-
-  resp.on('end', () => {
-    console.log(normaliseResponse(JSON.parse(data)));
-  });
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
 ```
 
 ## API
@@ -74,7 +60,7 @@ The text to be translated
 #### options
 ```typescript
 type TranslateOptions = {
-  client: 'gtx' | 'webapp';
+  rpcids: string;
   from: LangKey;
   to: LangKey;
   hl: LangKey;
@@ -85,7 +71,7 @@ type TranslateOptions = {
 ##### example
 ```typescript
 const options = {
-  client: 'gtx',
+  rpcids: 'MkEWBc',
   from: 'ua',
   to: 'en',
   hl: 'en',
@@ -121,5 +107,3 @@ Formats the google translate response.
 
 ### generateRequestUrl(text: string, options: Partial<Omit<TranslateOptions, 'raw'>>): string
 Generates a url to google translate api.
-
-### setCORS(CORSURL: string): translate
