@@ -29,7 +29,7 @@ export function normaliseResponse(rawBody: string, raw = false): TranslationResu
   }
 
   if (!data) {
-    throw new Error('No data')
+    throw new Error('Data is either empty or corrupted')
   }
 
   const result: TranslationResult = {
