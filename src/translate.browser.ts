@@ -2,13 +2,12 @@ import { generateRequestUrl } from "./generateRequestUrl";
 import { defaultTranslateOptions } from "./defaultTranslateOptions";
 import { TranslateOptions } from "./TranslateOptions";
 import { normaliseResponse } from "./normaliseResponse";
+import { createRequestBody } from "./createRequestBody";
 
 export async function translate(text: string, options: Partial<TranslateOptions & { corsUrl: string }> = {}) {
   const translateOptions = { ...defaultTranslateOptions, ...options };
 
-  const encodedData = encodeURIComponent(`[[["${translateOptions.rpcids}","[[\\"${text}\\",\\"${translateOptions.from}\\",\\"${translateOptions.to}\\",true],[1]]",null,"generic"]]]`);
-  const body = `f.req=${encodedData}&`;
-
+  const body = createRequestBody(text, translateOptions);
   const url = generateRequestUrl(translateOptions);
 
   const response = await fetch(`${options.corsUrl || ''}${url}`, {
@@ -17,11 +16,11 @@ export async function translate(text: string, options: Partial<TranslateOptions 
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body,
-  })
+  });
 
   if (!response.ok) {
     throw new Error('Request failed');
   }
 
-  return normaliseResponse(await response.text())
+  return normaliseResponse(await response.text());
 }
