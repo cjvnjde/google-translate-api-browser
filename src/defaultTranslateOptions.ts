@@ -5,5 +5,5 @@ export const defaultTranslateOptions: TranslateOptions = {
   to: "en",
   hl: "en",
   tld: "com",
-  rpcids: "rPsWke",
+  rpcids: "MkEWBc",
 };

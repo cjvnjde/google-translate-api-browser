@@ -9,7 +9,7 @@ export function createRequestBody(text: string, {
   to = defaultTranslateOptions.to
 }: CreateRequestBodyOptions = {}) {
   const encodedData = encodeURIComponent(
-    `[[["${rpcids}","[[\\"${text}\\",\\"${from}\\",\\"${to}\\",true],[1]]",null,"generic"]]]`
+    `[[["${rpcids}","[[\\"${text}\\",\\"${from}\\",\\"${to}\\", 1],[]]",null,"generic"]]]`
   );
 
   return `f.req=${encodedData}&`;
