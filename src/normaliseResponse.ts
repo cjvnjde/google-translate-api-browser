@@ -20,7 +20,7 @@ export type TranslationResult = {
 export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
   const content = rawBody.match(/"\[.*]"/);
 
-  let data: any[] | null = null;
+  let data: any | null = null;
 
   if (content) {
     let valuableContent = content[0];

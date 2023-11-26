@@ -7,7 +7,7 @@ export function createRequestBody(text: string, {
   rpcids = defaultTranslateOptions.rpcids,
   from = defaultTranslateOptions.from,
   to = defaultTranslateOptions.to
-}: CreateRequestBodyOptions) {
+}: CreateRequestBodyOptions = {}) {
   const encodedData = encodeURIComponent(
     `[[["${rpcids}","[[\\"${text}\\",\\"${from}\\",\\"${to}\\",true],[1]]",null,"generic"]]]`
   );

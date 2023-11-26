@@ -4,23 +4,25 @@ import { TranslateOptions } from "./TranslateOptions";
 import { normaliseResponse } from "./normaliseResponse";
 import { createRequestBody } from "./createRequestBody";
 
-export async function translate(text: string, options: Partial<TranslateOptions & { corsUrl: string }> = {}) {
-  const translateOptions = { ...defaultTranslateOptions, ...options };
+type BrowserTranslateOptions = Partial<TranslateOptions & { corsUrl: string, raw: boolean }>;
+
+export async function translate(text: string, options: BrowserTranslateOptions = {}) {
+  const translateOptions: BrowserTranslateOptions = { raw: false, corsUrl: "", ...defaultTranslateOptions, ...options };
 
   const body = createRequestBody(text, translateOptions);
   const url = generateRequestUrl(translateOptions);
 
-  const response = await fetch(`${options.corsUrl || ""}${url}`, {
+  const response = await fetch(`${options.corsUrl}${url}`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
     },
-    body,
+    body
   });
 
   if (!response.ok) {
     throw new Error("Request failed");
   }
 
-  return normaliseResponse(await response.text());
+  return normaliseResponse(await response.text(), translateOptions.raw);
 }

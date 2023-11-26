@@ -5,8 +5,10 @@ import { normaliseResponse, TranslationResult } from "./normaliseResponse";
 import { createRequestBody } from "./createRequestBody";
 import * as https from "node:https";
 
-export function translate(text: string, options: Partial<TranslateOptions> = {}): Promise<TranslationResult> {
-  const translateOptions = { ...defaultTranslateOptions, ...options };
+type ServerTranslateOptions = Partial<TranslateOptions & { raw: boolean }>;
+
+export function translate(text: string, options: ServerTranslateOptions = {}): Promise<TranslationResult> {
+  const translateOptions: ServerTranslateOptions = { raw: false, ...defaultTranslateOptions, ...options };
 
   return new Promise((resolve, reject) => {
     const body = createRequestBody(text, translateOptions);
@@ -30,7 +32,7 @@ export function translate(text: string, options: Partial<TranslateOptions> = {})
           });
 
           resp.on("end", () => {
-            resolve(normaliseResponse(data));
+            resolve(normaliseResponse(data, translateOptions.raw));
           });
         },
       )

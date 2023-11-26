@@ -1,27 +1,30 @@
 import { defaultTranslateOptions } from "./defaultTranslateOptions";
 import { TranslateOptions } from "./TranslateOptions";
 
-function validateTLD(tld: string) {
+function validateTLD(tld: string): boolean {
   return Boolean(tld.match(/^[a-zA-Z]{2,63}$/));
 }
 
-export function generateRequestUrl(options: Partial<Omit<TranslateOptions, "raw">> = {}): string {
-  const translateOptions = { ...defaultTranslateOptions, ...options };
+type GenerateRequestUrlOptions = Partial<Pick<TranslateOptions, "rpcids" | "hl" | "tld">>
 
-  if (!validateTLD(translateOptions.tld)) {
+export function generateRequestUrl({
+  rpcids = defaultTranslateOptions.rpcids,
+  hl = defaultTranslateOptions.hl,
+  tld = defaultTranslateOptions.tld
+}: GenerateRequestUrlOptions = {}): string {
+  if (!validateTLD(tld)) {
     throw new Error("Invalid TLD: Must be 2-63 letters only");
   }
 
-  const queryParams = {
-    rpcids: translateOptions.rpcids,
+  const searchParams = new URLSearchParams({
+    rpcids: rpcids,
     "source-path": "/",
-    hl: translateOptions.hl,
+    hl: hl,
     "soc-app": "1",
     "soc-platform": "1",
     "soc-device": "1",
-    rt: "c",
-  };
-  const searchParams = new URLSearchParams(queryParams);
+    rt: "c"
+  });
 
-  return `https://translate.google.${translateOptions.tld}/_/TranslateWebserverUi/data/batchexecute?${searchParams}`;
+  return `https://translate.google.${tld}/_/TranslateWebserverUi/data/batchexecute?${searchParams}`;
 }
