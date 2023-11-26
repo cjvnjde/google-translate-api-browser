@@ -10,16 +10,16 @@ export async function translate(text: string, options: Partial<TranslateOptions 
   const body = createRequestBody(text, translateOptions);
   const url = generateRequestUrl(translateOptions);
 
-  const response = await fetch(`${options.corsUrl || ''}${url}`, {
-    method: 'POST',
+  const response = await fetch(`${options.corsUrl || ""}${url}`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body,
   });
 
   if (!response.ok) {
-    throw new Error('Request failed');
+    throw new Error("Request failed");
   }
 
   return normaliseResponse(await response.text());

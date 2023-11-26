@@ -7,29 +7,29 @@ export type LanguageData = {
     autoCorrected: boolean;
     value: string;
     didYouMean: boolean;
-  }
-}
+  };
+};
 
 export type TranslationResult = {
   text: string;
   pronunciation: string;
   from: LanguageData;
   raw?: any;
-}
+};
 
 export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
-  const content = rawBody.match(/"\[.*]"/)
+  const content = rawBody.match(/"\[.*]"/);
 
-  let data: any[] | null = null
+  let data: any[] | null = null;
 
   if (content) {
-    let valuableContent = content[0]
+    let valuableContent = content[0];
 
-    data = JSON.parse(JSON.parse(valuableContent))
+    data = JSON.parse(JSON.parse(valuableContent));
   }
 
   if (!data) {
-    throw new Error('Data is either empty or corrupted')
+    throw new Error("Data is either empty or corrupted");
   }
 
   const result: TranslationResult = {

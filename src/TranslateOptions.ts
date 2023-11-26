@@ -7,4 +7,4 @@ export type TranslateOptions = {
   raw: boolean;
   tld: string;
   rpcids: string;
-}
+};
