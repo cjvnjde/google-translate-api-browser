@@ -8,6 +8,9 @@ devDependencies:
   '@types/node':
     specifier: ^18.13.0
     version: 18.13.0
+  prettier:
+    specifier: ^3.1.0
+    version: 3.1.0
   ts-loader:
     specifier: ^9.4.2
     version: 9.4.2(typescript@4.9.5)(webpack@5.89.0)
@@ -639,6 +642,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /punycode@2.3.0:
