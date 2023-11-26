@@ -1,8 +1,15 @@
 import { TranslateOptions } from "./TranslateOptions";
+import { defaultTranslateOptions } from "./defaultTranslateOptions";
 
-export function createRequestBody(text: string, translateOptions: Pick<TranslateOptions, "to" | "from" | "rpcids">) {
+type CreateRequestBodyOptions = Partial<Pick<TranslateOptions, "to" | "from" | "rpcids">>
+
+export function createRequestBody(text: string, {
+  rpcids = defaultTranslateOptions.rpcids,
+  from = defaultTranslateOptions.from,
+  to = defaultTranslateOptions.to
+}: CreateRequestBodyOptions) {
   const encodedData = encodeURIComponent(
-    `[[["${translateOptions.rpcids}","[[\\"${text}\\",\\"${translateOptions.from}\\",\\"${translateOptions.to}\\",true],[1]]",null,"generic"]]]`,
+    `[[["${rpcids}","[[\\"${text}\\",\\"${from}\\",\\"${to}\\",true],[1]]",null,"generic"]]]`
   );
 
   return `f.req=${encodedData}&`;
