@@ -1,5 +1,6 @@
 *
-!/dist/*.ts
+!/dist
+!/dist/**/*
 !package.json
 !LICENSE
 !README.md
