@@ -71,6 +71,23 @@ module.exports = () => {
           type: "commonjs2"
         },
       },
+    },
+    // node ESM bundle
+    {
+      ...baseConfig,
+      target: 'node',
+      entry: './src/index.server.ts',
+      experiments: {
+        outputModule: true,
+      },
+      output: {
+        path: path.resolve(__dirname, 'dist', 'node'),
+        filename: 'esm.js',
+        chunkFormat: "module",
+        library: {
+          type: "module"
+        },
+      },
     }
   ]
 };
