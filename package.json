@@ -11,18 +11,16 @@
     "watch": "webpack --watch"
   },
   "exports": {
-    "types": {
-      "node": "./dist/index.server.d.ts",
-      "browser": "./dist/index.browser.d.ts"
-    },
     "node": {
       "require": "./dist/node/cjs.js",
-      "import": "./dist/node/esm.js"
+      "import": "./dist/node/esm.js",
+      "types": "./dist/index.server.d.ts"
     },
     "browser": {
       "require": "./dist/browser/cjs.js",
       "import": "./dist/browser/esm.js",
-      "default": "./dist/browser/umd.js"
+      "default": "./dist/browser/umd.js",
+      "types": "./dist/index.browser.d.ts"
     }
   },
   "keywords": [
