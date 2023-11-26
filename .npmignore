@@ -1,8 +1,5 @@
-*examples
-*.ts
+*
 !/dist/*.ts
-*node_modules
-.idea
-.parcel-cache
-webpack.config.js
-tsconfig.json
+!package.json
+!LICENSE
+!README.md
