@@ -1,4 +1,4 @@
-import { TranslateOptions } from "./TranslateOptions";
+import { TranslateOptions } from "./types/TranslateOptions";
 
 export const defaultTranslateOptions: TranslateOptions = {
   from: "auto",

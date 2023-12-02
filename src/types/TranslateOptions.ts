@@ -1,4 +1,4 @@
-import { LangKey } from "./languages";
+import { LangKey } from "./LangKey";
 
 export type TranslateOptions = {
   from: LangKey;

@@ -1,21 +1,4 @@
-export type LanguageData = {
-  language: {
-    didYouMean: boolean;
-    iso: string;
-  };
-  text: {
-    autoCorrected: boolean;
-    value: string;
-    didYouMean: boolean;
-  };
-};
-
-export type TranslationResult = {
-  text: string;
-  pronunciation: string;
-  from: LanguageData;
-  raw?: any;
-};
+import { TranslationResult } from "./types/TranslationResult";
 
 export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
   const content = rawBody.match(/"\[.*]"/);

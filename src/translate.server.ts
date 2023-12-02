@@ -1,11 +1,10 @@
-import { generateRequestUrl } from "./generateRequestUrl";
-import { defaultTranslateOptions } from "./defaultTranslateOptions";
-import { TranslateOptions } from "./TranslateOptions";
-import { normaliseResponse, TranslationResult } from "./normaliseResponse";
-import { createRequestBody } from "./createRequestBody";
 import * as https from "node:https";
-
-type ServerTranslateOptions = Partial<TranslateOptions & { raw: boolean }>;
+import { createRequestBody } from "./createRequestBody";
+import { defaultTranslateOptions } from "./defaultTranslateOptions";
+import { generateRequestUrl } from "./generateRequestUrl";
+import { normaliseResponse } from "./normaliseResponse";
+import { ServerTranslateOptions } from "./types/ServerTranslateOptions";
+import { TranslationResult } from "./types/TranslationResult";
 
 export function translate(text: string, options: ServerTranslateOptions = {}): Promise<TranslationResult> {
   const translateOptions: ServerTranslateOptions = { raw: false, ...defaultTranslateOptions, ...options };

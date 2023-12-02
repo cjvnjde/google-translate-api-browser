@@ -113,10 +113,4 @@ const langs = {
   zu: "Zulu",
 } as const;
 
-export type LangKey = keyof typeof langs;
-
-export const isSupported = (desiredLang: LangKey): boolean => {
-  return Boolean(langs[desiredLang]);
-};
-
 export default langs;

@@ -1,11 +1,9 @@
 import { defaultTranslateOptions } from "./defaultTranslateOptions";
-import { TranslateOptions } from "./TranslateOptions";
+import { GenerateRequestUrlOptions } from "./types/GenerateRequestUrlOptions";
 
 function validateTLD(tld: string): boolean {
   return Boolean(tld.match(/^[a-zA-Z]{2,63}$/));
 }
-
-type GenerateRequestUrlOptions = Partial<Pick<TranslateOptions, "rpcids" | "hl" | "tld">>
 
 export function generateRequestUrl({
   rpcids = defaultTranslateOptions.rpcids,

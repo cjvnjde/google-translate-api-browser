@@ -1,10 +1,9 @@
-import { generateRequestUrl } from "./generateRequestUrl";
-import { defaultTranslateOptions } from "./defaultTranslateOptions";
-import { TranslateOptions } from "./TranslateOptions";
-import { normaliseResponse, TranslationResult } from "./normaliseResponse";
 import { createRequestBody } from "./createRequestBody";
-
-type BrowserTranslateOptions = Partial<TranslateOptions & { corsUrl: string, raw: boolean }>;
+import { defaultTranslateOptions } from "./defaultTranslateOptions";
+import { generateRequestUrl } from "./generateRequestUrl";
+import { normaliseResponse } from "./normaliseResponse";
+import { BrowserTranslateOptions } from "./types/BrowserTranslateOptions";
+import { TranslationResult } from "./types/TranslationResult";
 
 export async function translate(text: string, options: BrowserTranslateOptions = {}): Promise<TranslationResult> {
   const translateOptions: BrowserTranslateOptions = { raw: false, corsUrl: "", ...defaultTranslateOptions, ...options };
