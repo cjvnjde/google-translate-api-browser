@@ -34,7 +34,7 @@ export function normaliseResponse(rawBody: string, raw = false): TranslationResu
 
   const result: TranslationResult = {
     text: data[1][0][0][5][0][0],
-    pronunciation: data[0][0],
+    pronunciation: data[1][0][0][1],
     from: {
       language: {
         didYouMean: Boolean(data[0][1]),

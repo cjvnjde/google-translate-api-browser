@@ -1,21 +1,16 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "noImplicitAny": true,
     "module": "ESNext",
-    "target": "es5",
+    "target": "ESNext",
     "lib": [
       "dom",
       "ESNext"
     ],
-    "strict": true,
-    "outDir": "dist",
-    "declaration": true,
-    "sourceMap": true
+    "strict": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "examples",
+  "include": [
     "vitest.config.ts",
     "__tests__"
   ]

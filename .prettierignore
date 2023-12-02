@@ -1,4 +1,7 @@
 *
 !/src
 !/src/**/*
-!*.js
+!/__tests__
+!/__tests__/**/*
+!*.config.js
+!*.config.ts
