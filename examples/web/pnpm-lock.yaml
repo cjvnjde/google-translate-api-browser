@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  google-translate-api-browser:
+    specifier: 4.2.3
+    version: 4.2.3
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1462,6 +1465,10 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
+
+  /google-translate-api-browser@4.2.3:
+    resolution: {integrity: sha512-M3awmpWRlEoLKfQ+CKcsWl95CzYGE+ba92tQDSAnHmfhRYMZ62Xr44F5cDkMsgkfJBRNLylmJFOeZYUWmqBETQ==}
+    dev: false
 
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}

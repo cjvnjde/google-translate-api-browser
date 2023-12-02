@@ -1,6 +1,6 @@
 # Google translate api browser
 
-[![npm - 4.1.4](https://img.shields.io/badge/npm-4.1.4-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
+[![npm - 4.2.4](https://img.shields.io/badge/npm-4.2.4-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
 
 Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
 
@@ -30,7 +30,7 @@ translate("Je ne mangé pas six jours", { to: "en", corsUrl: "http://cors-anywhe
   });
 ```
 
-#### For node
+#### For node (commonjs)
 
 You don't need to use CORS for node
 
@@ -46,6 +46,13 @@ translate("Je ne mangé pas six jours", { to: "en" })
     console.error(err);
   });
 ```
+
+[Link to codesandbox](https://codesandbox.io/p/sandbox/google-translate-api-node-zgg694)
+[Link to codesandbox with custom fetch function](https://codesandbox.io/p/sandbox/google-translate-api-node-custom-kr29rz)
+
+#### For node (esm)
+
+[Link to codesandbox](https://codesandbox.io/p/sandbox/google-translate-api-node-esm-3x22v2)
 
 ## API
 
@@ -64,8 +71,8 @@ type TranslateOptions = {
   from: LangKey;
   to: LangKey;
   hl: LangKey;
-  raw: boolean;
   tld: string;
+  raw: boolean;
 }
 ```
 ##### example
@@ -75,8 +82,8 @@ const options = {
   from: 'ua',
   to: 'en',
   hl: 'en',
-  raw: false,
   tld: 'com',
+  raw: true,
 }
 ```
 #### returns
@@ -95,7 +102,7 @@ type TranslationResult = {
       didYouMean: boolean; // `true` if the API has suggested corrections to the `text`
     }
   };
-  raw?: any; // If `options.raw` is true, the raw response from Google Translate servers
+  raw?: any;
 }
 ```
 

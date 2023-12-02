@@ -1,7 +1,8 @@
 {
   "name": "google-translate-api-browser",
-  "version": "4.1.9",
+  "version": "4.2.4",
   "description": "A free and unlimited API for Google Translate that works in browser",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/cjvnjde/google-translate-api-browser"
@@ -11,11 +12,11 @@
     "watch": "webpack --watch",
     "format": "prettier --write ."
   },
+  "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
     "node": {
-      "require": "./dist/node/cjs.js",
-      "import": "./dist/node/esm.js"
+      "require": "./dist/node/cjs.cjs",
+      "import": "./dist/node/esm.mjs"
     },
     "browser": {
       "require": "./dist/browser/cjs.js",

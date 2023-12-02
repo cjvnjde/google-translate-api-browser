@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { translate } from '../../../src/index.browser.ts'
+import { translate } from "google-translate-api-browser";
 
 function App() {
   const [cors, setCors] = useState("http://cors-anywhere.herokuapp.com/");
@@ -11,15 +11,16 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const onTranslate = () => {
-    setIsLoading(true)
-    translate(input, { to: 'en', corsUrl: cors })
+    setIsLoading(true);
+    translate(input, { to: "en", corsUrl: cors })
       .then((res: any) => {
         setOutput(res.text);
       })
       .catch((err: unknown) => {
         console.error(err);
-      }).finally(() => setIsLoading(false));
-  }
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   return (
     <>
@@ -32,7 +33,7 @@ function App() {
             <div className="mt-2">
               <input
                 value={cors}
-                onChange={e => setCors(e.target.value)}
+                onChange={(e) => setCors(e.target.value)}
                 type="text"
                 name="cors"
                 id={corsInputId}
@@ -46,7 +47,7 @@ function App() {
               <div className="mt-2">
                 <input
                   value={input}
-                  onChange={e => setInput(e.target.value)}
+                  onChange={(e) => setInput(e.target.value)}
                   type="text"
                   name="input"
                   id={inputId}
@@ -64,9 +65,9 @@ function App() {
                 {isLoading ? "loading..." : "Translate"}
               </button>
             </div>
-           <div className="sm:col-span-3">
-             <span className="text-sm text-gray-500">Translated text: </span> {output || '-'}
-           </div>
+            <div className="sm:col-span-3">
+              <span className="text-sm text-gray-500">Translated text: </span> {output || "-"}
+            </div>
           </div>
         </div>
       </div>

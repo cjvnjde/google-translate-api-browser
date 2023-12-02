@@ -1,93 +1,96 @@
-const path = require('node:path');
+import path from "node:path";
 
+function getOutPath(foldername) {
+  return path.resolve(import.meta.dirname, "dist", foldername);
+}
 
-module.exports = () => {
+export default () => {
   const baseConfig = {
-    mode: 'production',
-    devtool: 'source-map',
+    mode: "production",
+    devtool: "source-map",
     module: {
       rules: [
         {
           test: /\.(ts|tsx)$/i,
-          loader: 'ts-loader',
-          exclude: ['/node_modules/', '/examples/'],
+          loader: "ts-loader",
+          exclude: ["/node_modules/", "/examples/"],
         },
       ],
     },
     resolve: {
-      extensions: ['.ts'],
+      extensions: [".ts"],
     },
-  }
+  };
 
   return [
     // Browser UMD bundle
     {
       ...baseConfig,
-      entry: './src/index.browser.ts',
+      entry: "./src/index.browser.ts",
       output: {
-        path: path.resolve(__dirname, 'dist', 'browser'),
-        filename: 'umd.js',
+        path: getOutPath("browser"),
+        filename: "umd.js",
         library: {
-          type: "umd"
+          type: "umd",
         },
       },
     },
     // browser ESM bundle
     {
       ...baseConfig,
-      entry: './src/index.browser.ts',
+      entry: "./src/index.browser.ts",
       output: {
-        path: path.resolve(__dirname, 'dist', 'browser'),
-        filename: 'esm.js',
+        path: getOutPath("browser"),
+        filename: "esm.js",
         library: {
-          type: "module"
+          type: "module",
         },
       },
       experiments: {
-        outputModule: true
-      }
+        outputModule: true,
+      },
     },
     // browser CJS bundle
     {
       ...baseConfig,
-      entry: './src/index.browser.ts',
+      entry: "./src/index.browser.ts",
       output: {
-        path: path.resolve(__dirname, 'dist', 'browser'),
-        filename: 'cjs.js',
+        path: getOutPath("browser"),
+        filename: "cjs.js",
         library: {
-          type: "commonjs2"
+          type: "commonjs2",
         },
       },
     },
     // node CJS bundle
     {
       ...baseConfig,
-      target: 'node',
-      entry: './src/index.server.ts',
+      target: "node",
+      entry: "./src/index.server.ts",
       output: {
-        path: path.resolve(__dirname, 'dist', 'node'),
-        filename: 'cjs.js',
+        path: getOutPath("node"),
+        filename: "cjs.cjs",
         library: {
-          type: "commonjs2"
+          type: "commonjs2",
         },
       },
     },
     // node ESM bundle
     {
       ...baseConfig,
-      target: 'node',
-      entry: './src/index.server.ts',
+      target: "node",
+      entry: "./src/index.server.ts",
       experiments: {
         outputModule: true,
       },
       output: {
-        path: path.resolve(__dirname, 'dist', 'node'),
-        filename: 'esm.js',
+        path: getOutPath("node"),
+        filename: "esm.mjs",
         chunkFormat: "module",
         library: {
-          type: "module"
+          type: "module",
         },
       },
-    }
-  ]
+    },
+  ];
 };
