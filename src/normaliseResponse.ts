@@ -15,8 +15,13 @@ export function normaliseResponse(rawBody: string, raw = false): TranslationResu
     throw new Error("Data is either empty or corrupted");
   }
 
+  const translatedPhrases: [string][] = data[1][0][0][5];
+  const text = translatedPhrases.reduce<string>((fullText, textBlock) => {
+      return fullText ? `${fullText} ${textBlock[0]}` : textBlock[0];
+  }, "");
+
   const result: TranslationResult = {
-    text: data[1][0][0][5][0][0],
+    text,
     pronunciation: data[1][0][0][1],
     from: {
       language: {
