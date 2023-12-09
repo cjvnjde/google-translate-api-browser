@@ -16,3 +16,13 @@ test("Should create request body for specific text input with custom options", (
 
   expect(decodeURIComponent(result)).toBe('f.req=[[["TEST_rpc","[[\\"test\\",\\"de\\",\\"gu\\",1],[]]",null,"generic"]]]&');
 });
+
+test("Should escape quotes", () => {
+  const result = createRequestBody('test "test"', {
+    rpcids: "TEST_rpc",
+    from: "de",
+    to: "gu",
+  });
+
+  expect(decodeURIComponent(result)).toBe('f.req=[[["TEST_rpc","[[\\"test \\\\\\"test\\\\\\"\\",\\"de\\",\\"gu\\",1],[]]",null,"generic"]]]&');
+});
