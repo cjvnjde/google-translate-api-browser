@@ -21,6 +21,7 @@ export function translate(text: string, options: ServerTranslateOptions = {}): P
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             "Content-Length": Buffer.byteLength(body),
+            ...translateOptions.headers,
           },
         },
         (resp) => {

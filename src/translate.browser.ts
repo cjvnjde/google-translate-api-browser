@@ -14,7 +14,8 @@ export async function translate(text: string, options: BrowserTranslateOptions =
   const response = await fetch(`${options.corsUrl}${url}`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded",
+      ...translateOptions.headers,
     },
     body
   });
