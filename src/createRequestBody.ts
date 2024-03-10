@@ -2,7 +2,7 @@ import { defaultTranslateOptions } from "./defaultTranslateOptions";
 import { CreateRequestBodyOptions } from "./types/CreateRequestBodyOptions";
 
 function escapeSpecialSymbols(inputString: string): string {
-    const escapedString = inputString.replace(/[\\`*_{}[\]()#+\-.!"]/g, '\\\\\\$&');
+    const escapedString = inputString.replace(/["]/g, '\\\\\\$&');
     const normalizedString = escapedString.replace(/\r\n|\r|\n/g, '\\\\n');
 
     return normalizedString;
