@@ -6,6 +6,6 @@ export type LanguageData = {
   text: {
     autoCorrected: boolean;
     value: string;
-    didYouMean: boolean;
+    didYouMean: string | null;
   };
 };

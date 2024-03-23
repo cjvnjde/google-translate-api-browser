@@ -5,7 +5,7 @@ test("Should create request url with default options", () => {
   const requestUrl = generateRequestUrl();
 
   expect(requestUrl).toBe(
-    "https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&source-path=%2F&hl=en&soc-app=1&soc-platform=1&soc-device=1&rt=c",
+    "https://translate.google.com/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&source-path=%2F&hl=en&soc-app=1&soc-platform=1&soc-device=1",
   );
 });
 

@@ -21,7 +21,6 @@ export function generateRequestUrl({
     "soc-app": "1",
     "soc-platform": "1",
     "soc-device": "1",
-    rt: "c",
   });
 
   return `https://translate.google.${tld}/_/TranslateWebserverUi/data/batchexecute?${searchParams}`;
