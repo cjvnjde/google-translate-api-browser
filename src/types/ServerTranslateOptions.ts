@@ -1,5 +1,7 @@
 import { TranslateOptions } from "./TranslateOptions";
 
-export type ServerTranslateOptions = Partial<TranslateOptions & {
-  raw: boolean
-}>;
+export type ServerTranslateOptions = Partial<
+  TranslateOptions & {
+    raw: boolean;
+  }
+>;

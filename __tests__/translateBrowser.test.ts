@@ -12,9 +12,11 @@ test("Should return correct value", async () => {
 
   vi.stubGlobal("fetch", vi.fn().mockResolvedValueOnce({ ok: true, text: () => Promise.resolve(enToUa) }));
 
-  await expect(translate("What's up")).resolves.toEqual(expect.objectContaining({
-    text: "Як справи"
-  }));
+  await expect(translate("What's up")).resolves.toEqual(
+    expect.objectContaining({
+      text: "Як справи",
+    }),
+  );
 });
 
 test("Should throw an error for failed requests", async () => {
@@ -36,14 +38,17 @@ test("Should be possible to pass custom headers", async () => {
 
   await translate("What's up", {
     headers: {
-      "Custom-Header": "Custom-Value"
-    }
-  })
+      "Custom-Header": "Custom-Value",
+    },
+  });
 
-  expect(fetch).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
-    headers: expect.objectContaining({
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Custom-Header": "Custom-Value"
-    })
-  }));
+  expect(fetch).toHaveBeenCalledWith(
+    expect.any(String),
+    expect.objectContaining({
+      headers: expect.objectContaining({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Custom-Header": "Custom-Value",
+      }),
+    }),
+  );
 });

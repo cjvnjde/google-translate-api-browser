@@ -8,21 +8,22 @@
     "url": "https://github.com/cjvnjde/google-translate-api-browser"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && pnpm run after-build",
     "watch": "webpack --watch",
     "format": "prettier --write .",
+    "after-build": "copyfiles -f ./src/*.d.ts ./dest",
     "test": "vitest"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dest/index.d.ts",
   "exports": {
     "node": {
-      "require": "./dist/node/cjs.cjs",
-      "import": "./dist/node/esm.mjs"
+      "require": "./dest/node/cjs.cjs",
+      "import": "./dest/node/esm.mjs"
     },
     "browser": {
-      "require": "./dist/browser/cjs.js",
-      "import": "./dist/browser/esm.js",
-      "default": "./dist/browser/umd.js"
+      "require": "./dest/browser/cjs.js",
+      "import": "./dest/browser/esm.js",
+      "default": "./dest/browser/umd.js"
     }
   },
   "keywords": [
@@ -41,6 +42,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.13.0",
+    "copyfiles": "^2.4.1",
     "prettier": "^3.1.0",
     "ts-loader": "^9.4.2",
     "typescript": "4.9.5",

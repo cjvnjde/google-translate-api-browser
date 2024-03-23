@@ -2,7 +2,7 @@ import { LangKey } from "./LangKey";
 
 type Headers = {
   [key: string]: string | string[];
-}
+};
 
 export type TranslateOptions = {
   from: LangKey;
