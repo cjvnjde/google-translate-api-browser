@@ -41,6 +41,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/node": "^18.13.0",
     "copyfiles": "^2.4.1",
     "prettier": "^3.1.0",

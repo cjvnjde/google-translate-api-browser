@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Build and test
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -31,7 +31,7 @@ jobs:
       - name: Test
         run: pnpm run test
   release:
-    name: Build and test
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
