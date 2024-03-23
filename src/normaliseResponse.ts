@@ -20,13 +20,14 @@ export function normaliseResponse(rawBody: string, raw = false): TranslationResu
 
   const result: TranslationResult = {
     text,
-    pronunciation: data[0][0],
+    pronunciation: data[1][0][0][1],
     from: {
       language: {
         didYouMean: Boolean(data[0][1]),
         iso: data[2]
       },
       text: {
+        pronunciation: data[0][0],
         autoCorrected: Boolean(data[0][1]),
         value: data[0][6][0],
         didYouMean: data[0][1] ? data[0][1][0][4] : null

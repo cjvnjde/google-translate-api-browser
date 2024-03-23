@@ -4,6 +4,7 @@ export type LanguageData = {
     iso: string;
   };
   text: {
+    pronunciation: string | null;
     autoCorrected: boolean;
     value: string;
     didYouMean: string | null;
