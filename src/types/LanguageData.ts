@@ -4,8 +4,9 @@ export type LanguageData = {
     iso: string;
   };
   text: {
+    pronunciation: string | null;
     autoCorrected: boolean;
     value: string;
-    didYouMean: boolean;
+    didYouMean: string | null;
   };
 };

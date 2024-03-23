@@ -6,4 +6,4 @@ test("Should check language code", () => {
   expect(isLanguageSupported("ru")).toBeTruthy();
   expect(isLanguageSupported("uk")).toBeTruthy();
   expect(isLanguageSupported("test" as any)).toBeFalsy();
-})
+});

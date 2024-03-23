@@ -8,13 +8,13 @@
       "ESNext"
     ],
     "strict": true,
-    "outDir": "dist",
+    "outDir": "dest",
     "declaration": true,
     "sourceMap": true
   },
   "exclude": [
     "node_modules",
-    "dist",
+    "dest",
     "examples",
     "vitest.config.ts",
     "__tests__"

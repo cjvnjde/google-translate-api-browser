@@ -1,7 +1,7 @@
 import path from "node:path";
 
-function getOutPath(foldername) {
-  return path.resolve(import.meta.dirname, "dist", foldername);
+function getOutPath(folderName) {
+  return path.resolve(import.meta.dirname, "dest", folderName);
 }
 
 export default () => {

@@ -1,5 +1,5 @@
 *.cache
-*dist
+*dest
 *node_modules
 .idea
 .parcel-cache

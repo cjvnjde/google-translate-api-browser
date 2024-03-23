@@ -17,7 +17,7 @@ export async function translate(text: string, options: BrowserTranslateOptions =
       "Content-Type": "application/x-www-form-urlencoded",
       ...translateOptions.headers,
     },
-    body
+    body,
   });
 
   if (!response.ok) {

@@ -1,23 +1,21 @@
-import { TranslationResult } from "./types/TranslationResult";
+import { RawContentType, RawTranslationResponse, TranslationResult } from "./types/TranslationResult";
 
-export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
-  const content = rawBody.match(/"\[.*]"/);
+function parseData(data: string) {
+  try {
+    const content: RawContentType = JSON.parse(data.replace(/^\)]}'/, ""));
+    const translationResponse: RawTranslationResponse = JSON.parse(content[0][2]);
 
-  let data: any | null = null;
-
-  if (content) {
-    let valuableContent = content[0];
-
-    data = JSON.parse(JSON.parse(valuableContent));
-  }
-
-  if (!data) {
+    return translationResponse;
+  } catch (e) {
     throw new Error("Data is either empty or corrupted");
   }
+}
 
-  const translatedPhrases: [string][] = data[1][0][0][5];
-  const text = translatedPhrases.reduce<string>((fullText, textBlock) => {
-      return fullText ? `${fullText} ${textBlock[0]}` : textBlock[0];
+export function normaliseResponse(rawBody: string, raw = false): TranslationResult {
+  const data = parseData(rawBody);
+  const translatedPhrases = data[1][0][0][5];
+  const text = translatedPhrases.reduce<string>((fullText, [textBlock]) => {
+    return fullText ? `${fullText} ${textBlock}` : textBlock;
   }, "");
 
   const result: TranslationResult = {
@@ -26,18 +24,19 @@ export function normaliseResponse(rawBody: string, raw = false): TranslationResu
     from: {
       language: {
         didYouMean: Boolean(data[0][1]),
-        iso: data[2],
+        iso: data[2]
       },
       text: {
-        autoCorrected: Boolean(data[1][0][0][3]),
-        value: Boolean(data[0][1]) ? data[0][1][0][4] : data[0][6][0],
-        didYouMean: Boolean(data[0][1]),
-      },
-    },
+        pronunciation: data[0][0],
+        autoCorrected: Boolean(data[0][1]),
+        value: data[0][6][0],
+        didYouMean: data[0][1] ? data[0][1][0][4] : null
+      }
+    }
   };
 
   if (raw) {
-    result.raw = rawBody;
+    result.raw = data;
   }
 
   return result;

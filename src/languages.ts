@@ -23,6 +23,7 @@ const langs = {
   da: "Danish",
   nl: "Dutch",
   en: "English",
+  'en-US': "English",
   eo: "Esperanto",
   et: "Estonian",
   tl: "Filipino",
