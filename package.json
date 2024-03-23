@@ -12,7 +12,8 @@
     "watch": "webpack --watch",
     "format": "prettier --write .",
     "after-build": "copyfiles -f ./src/*.d.ts ./dest",
-    "test": "vitest"
+    "test": "vitest",
+    "release": "changeset publish"
   },
   "types": "./dest/index.d.ts",
   "exports": {

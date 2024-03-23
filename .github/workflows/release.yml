@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: Test and Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -29,26 +29,6 @@ jobs:
 
       - name: Test
         run: pnpm run test
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: false
-
-      - name: Install Dependencies
-        run: pnpm i --frozen-lockfile
 
       - name: Build
         run: pnpm run build
@@ -57,6 +37,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          publish: pnpm run release
           commit: Version release
           title: Next release
         env:
