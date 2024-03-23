@@ -1,8 +1,6 @@
 # Google translate api browser
 
-[![npm - 4.2.7](https://img.shields.io/badge/npm-4.2.7-2ea44f?logo=npm&logoColor=%23CB3837)](https://www.npmjs.com/package/google-translate-api-browser)
-
-Based on [google-translate-api](https://github.com/matheuss/google-translate-api) and [google-translate-token](https://github.com/matheuss/google-translate-token)
+[![NPM Version](https://img.shields.io/npm/v/google-translate-api-browser)](https://www.npmjs.com/package/google-translate-api-browser)
 
 ## Install
 
@@ -10,8 +8,7 @@ Based on [google-translate-api](https://github.com/matheuss/google-translate-api
 npm install google-translate-api-browser
 ```
 
-For cross origin requests it uses [cors-anywhere
-](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server `https://cors-anywhere.herokuapp.com/` or set up your own. By default it does not use proxying.
+For cross origin requests it uses [cors-anywhere](https://github.com/Rob--W/cors-anywhere). You can use public cors-anywhere server `https://cors-anywhere.herokuapp.com/` or set up your own. By default it does not use proxying.
 
 ## Examples
 
@@ -97,17 +94,14 @@ type TranslationResult = {
       iso: string; // The code of the language that the API has recognized in the `text`
     };
     text: {
-      autoCorrected: boolean; // `true` if the API has auto corrected the `text`
-      value: string; // The auto corrected `text` or the `text` with suggested corrections
-      didYouMean: boolean; // `true` if the API has suggested corrections to the `text`
+      autoCorrected: boolean; 
+      value: string;
+      didYouMean: string;
     }
   };
   raw?: any;
 }
 ```
-
-Note that `from.text` will only be returned if `from.text.autoCorrected` or `from.text.didYouMean` equals to `true`. In this case, it will have the corrections delimited with brackets (`[ ]`):
-
 
 ### normaliseResponse(body: any, raw = false): TranslationResult
 Formats the google translate response.
