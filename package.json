@@ -1,6 +1,6 @@
 {
   "name": "google-translate-api-browser",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A free and unlimited API for Google Translate that works in browser",
   "type": "module",
   "repository": {
