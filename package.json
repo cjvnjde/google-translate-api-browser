@@ -1,54 +1,1 @@
-{
-  "name": "google-translate-api-browser",
-  "version": "5.0.1",
-  "description": "A free and unlimited API for Google Translate that works in browser",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cjvnjde/google-translate-api-browser"
-  },
-  "scripts": {
-    "build": "webpack && pnpm run after-build",
-    "watch": "webpack --watch",
-    "format": "prettier --write .",
-    "after-build": "copyfiles -f ./src/*.d.ts ./dest",
-    "test": "vitest"
-  },
-  "types": "./dest/index.d.ts",
-  "exports": {
-    "node": {
-      "require": "./dest/node/cjs.cjs",
-      "import": "./dest/node/esm.mjs"
-    },
-    "browser": {
-      "require": "./dest/browser/cjs.js",
-      "import": "./dest/browser/esm.js",
-      "default": "./dest/browser/umd.js"
-    }
-  },
-  "keywords": [
-    "translate",
-    "translator",
-    "google",
-    "translate",
-    "api",
-    "free",
-    "language"
-  ],
-  "author": {
-    "name": "Vitalij Nykyforenko",
-    "email": "vitalij.nykyforenko@gmail.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "@types/node": "^18.13.0",
-    "copyfiles": "^2.4.1",
-    "prettier": "^3.1.0",
-    "ts-loader": "^9.4.2",
-    "typescript": "4.9.5",
-    "vitest": "^0.34.6",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.0.1"
-  }
-}
+{  "name": "google-translate-api-browser",  "version": "4.3.2",  "description": "A free and unlimited API for Google Translate that works in browser",  "type": "module",  "repository": {    "type": "git",    "url": "https://github.com/cjvnjde/google-translate-api-browser"  },  "scripts": {    "build": "webpack && pnpm run after-build",    "watch": "webpack --watch",    "format": "prettier --write .",    "after-build": "copyfiles -f ./src/*.d.ts ./dest",    "test": "vitest"  },  "types": "./dest/index.d.ts",  "exports": {    "node": {      "require": "./dest/node/cjs.cjs",      "import": "./dest/node/esm.mjs"    },    "browser": {      "require": "./dest/browser/cjs.js",      "import": "./dest/browser/esm.js",      "default": "./dest/browser/umd.js"    }  },  "keywords": [    "translate",    "translator",    "google",    "translate",    "api",    "free",    "language"  ],  "author": {    "name": "Vitalij Nykyforenko",    "email": "vitalij.nykyforenko@gmail.com"  },  "license": "MIT",  "devDependencies": {    "@changesets/cli": "^2.27.1",    "@types/node": "^18.13.0",    "copyfiles": "^2.4.1",    "prettier": "^3.1.0",    "ts-loader": "^9.4.2",    "typescript": "4.9.5",    "vitest": "^0.34.6",    "webpack": "^5.89.0",    "webpack-cli": "^5.0.1"  }}
