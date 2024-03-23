@@ -1,11 +1,9 @@
-name: test
+name: Test
 
 on:
-  push:
-    branches: [master]
   pull_request:
-    branches: [master]
-  workflow_dispatch: {}
+    branches:
+      - master
 
 jobs:
   test:
@@ -30,5 +28,5 @@ jobs:
       - name: Install Dependencies
         run: pnpm i --frozen-lockfile
 
-      - name: Test
+      - name: Run tests
         run: pnpm run test
